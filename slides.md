@@ -802,7 +802,7 @@ No Silver Bullet
 
 - 在编译器出错好过运行时
   - 不使用 TypeScript 开发多人维护的大型项目
-  - 使用 any 糊弄 TypeScript 检查
+  - 使用 `any` 糊弄 TypeScript 检查
 - 对于有长期维护价值的项目，今天出错好过明天出错
   - hard code 越来越多导致容错率越来越低
 
