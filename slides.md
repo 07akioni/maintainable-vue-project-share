@@ -341,12 +341,46 @@ defineComponent({
 
 ---
 
+
+# mixin · 滥用 · 实例
+
+### naive-ui 的 `Select` 组件，Vue 2
+
+<div style="display: flex;">
+
+<img src="/select.png" style="height: 350px; margin-right: 24px;" />
+
+<div>
+
+- `withapp` 读取全局配置
+  - 隐式注入 `namespace` 等属性
+- `themeable` 读取主题配置
+  - 隐式依赖 `theme` 属性，隐式注入 `syntheticTheme` 等 3 个属性
+- `detachable` 把菜单 DOM 卸载于 body
+  - 隐式依赖 `contentContainer` ref，隐式混入和提供近 10 个方法和属性
+- `placeable` 定位菜单
+  - 隐式依赖 `activator`、`content`，`contentContainer` ref 和 `active` 属性，隐式混入和提供近 20 个方法和属性
+- `zindexable` 管理菜单 `z-index`，...
+- `locale('Select')` 国际化，...
+- `asformitem()` 表单，...
+- `usecssr(styles)` 样式，css-in-js，...
+
+</div>
+
+</div>
+
+---
+
+
 # mixin · 治理方式
 
 - 在 Vue 3 中，在业务逻辑中**彻底禁止** mixin 的使用
   - 如果不得不用，也仅允许在同一个地方进行全局 mixin 的注册（例如全局监控、统计）
 - composition api
   - composition api 可以完全代替 mixin
+- 其他的显式逻辑
+  - 组件化
+  - directive
 
 ---
 
@@ -422,6 +456,67 @@ defineComponent({
   },
 });
 ```
+
+---
+
+# mixin · 使用 composable 治理 · 实例
+
+### Naive UI 的 `Select` 组件，Vue 2
+
+<div style="display: flex;">
+
+<img src="/select.png" style="height: 350px; margin-right: 24px;" />
+
+<div>
+
+- `withapp` 读取全局配置
+  - 隐式注入 `namespace` 等属性
+- `themeable` 读取主题配置
+  - 隐式依赖 `theme` 属性，隐式注入 `syntheticTheme` 等 3 个属性
+- `detachable` 把菜单 DOM 卸载于 body
+  - 隐式依赖 `contentContainer` ref，隐式混入和提供近 10 个方法和属性
+- `placeable` 定位菜单
+  - 隐式依赖 `activator`、`content`，`contentContainer` ref 和 `active` 属性，隐式混入和提供近 20 个方法和属性
+- `zindexable` 管理菜单 `z-index`，...
+- `locale('Select')` 国际化，...
+- `asformitem()` 表单，...
+- `usecssr(styles)` 样式，css-in-js，...
+
+</div>
+
+</div>
+
+---
+
+# mixin · 使用 composable 治理 · 实例
+
+### Naive UI 的 `Select` 组件，Vue 3
+
+- `withapp` 读取全局配置：composable
+- `themeable` 读取主题配置：composable
+- `locale('Select')` 国际化：composable
+- `usecssr(styles)` 样式，css-in-js：国际化：composable
+
+<br />
+
+<img src="/select-1.png" style="height: 150px;" />
+<img src="/select-2.png" style="height: 60px;" />
+<img src="/select-3.png" style="height: 40px;" />
+
+---
+
+# mixin · 使用 composable 治理 · 实例
+
+### Naive UI 的 `Select` 组件，Vue 3
+
+- `detachable` 把菜单 DOM 卸载于 body：`Teleport`
+- `placeable` 定位菜单：组件化
+- `zindexable` 管理菜单 `z-index`：`directive`
+
+<img src="/select-4.png" style="height: 300px; display: inline-block; margin-right: 24px;" />
+<img src="/select-5.png" style="height: 300px; display: inline-block;" />
+
+
 
 ---
 
@@ -615,8 +710,6 @@ const data = {
 `$attrs` 不需要声明，没有确切类型，没人知道这是哪来的，干啥的
 
 </v-click>
-
-
 
 ---
 
