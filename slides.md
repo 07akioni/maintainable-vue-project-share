@@ -3,7 +3,6 @@
 theme: default
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
 # apply any windi css classes to the current slide
 class: "text-center"
 # https://sli.dev/custom/highlighters.html
@@ -12,9 +11,24 @@ highlighter: shiki
 lineNumbers: false
 ---
 
-# 如何构建可持续维护的 B 端 Vue 项目
+# 如何构建可持续维护的<br/>B 端 Vue 项目
 
 张乐聪 · 07akioni
+
+<img src="/cover.jpeg" style="margin: auto;" />
+
+---
+
+# 关于我
+
+- 张乐聪
+  - 生产用户界面
+- Naive UI 的作者
+  - https://www.naiveui.com
+- Github 07akioni
+  - https://github.com/07akioni
+- 知乎 松若章
+  - https://www.zhihu.com/people/hrsonion
 
 ---
 
@@ -248,7 +262,7 @@ lineNumbers: false
   - 例如：状态变更发生在八杆子打不着的文件（`window.xxx = '报错吧'`)
   - 例如：直接 extends 一个组件，新旧数据、方法在同一文件混用，相互依赖
 - 极度依赖运行时行为
-  - 例如：类型使用 any 或者打全局补丁，不跑起来不知道行不行
+  - 例如：类型使用 `any` 或者打全局补丁，不跑起来不知道行不行
 
 ---
 
@@ -336,6 +350,22 @@ defineComponent({
 
 ---
 
+# Composition API
+
+简单介绍一下组合式 API
+
+组合式 API 可以将同一个逻辑关注点相关代码收集在一起
+
+<img src="/vs.png" style="height: 50%;" />
+
+<div class="mt-4" v-click>
+
+> 大多数情况，Composition API 的功能都可以使用 Options API 进行实现，但是更加复杂、可维护性低、类型支持差
+
+</div>
+
+---
+
 # mixin · 使用 composable 治理 1
 
 ```js
@@ -355,11 +385,11 @@ function useFoo2() {
 }
 defineComponent({
   setup() {
-    const { foo: foo1 } = useFoo1();
-    const { foo: foo2 } = useFoo2();
+    const { foo: foo1 } = useFoo1(); // 显式使用
+    const { foo: foo2 } = useFoo2(); // 显式使用
     return {
-      foo1,
-      foo2,
+      foo1, // 显式使用
+      foo2, // 显式使用
     };
   },
 });
@@ -385,10 +415,10 @@ function useFoo(props: ExtractPropTypes<typeof useFooProps>) {
 
 defineComponent({
   props: {
-    ...useFooProps
+    ...useFooProps // 显式使用
   },
   setup(props) {
-    const { printFoo } = useFoo(props)
+    const { printFoo } = useFoo(props) // 显式使用
   },
 });
 ```
@@ -520,6 +550,13 @@ window.xxx = x;
 
 </v-click>
 
+<v-click>
+
+一旦冲突，晚上就又要加班了
+<img src="/cover.jpeg" style="margin: auto; height: 100px;" />
+
+</v-click>
+
 ---
 
 # global properties · 治理方式
@@ -536,10 +573,14 @@ export function setSomething(value) {
 // 不要 window.something
 ```
 
-### 原则
+<v-click>
+
+### 使用原则
 
 - 如果你说不出理由**必须**要使用全局变量，就不要使用
 - 即不要因为全局变量能行，所以使用；而是只有它能行，所以使用
+
+</v-click>
 
 ---
 
@@ -557,9 +598,7 @@ export function setSomething(value) {
 
 </v-click>
 
----
-
-# $attrs · 滥用
+<v-click>
 
 ```js
 const data = {
@@ -567,11 +606,17 @@ const data = {
 };
 ```
 
+</v-click>
+
 <v-click>
 
 开发者省了个 props 的时间，后续维护者一脸懵逼
 
+`$attrs` 不需要声明，没有确切类型，没人知道这是哪来的，干啥的
+
 </v-click>
+
+
 
 ---
 
@@ -580,6 +625,12 @@ const data = {
 ### 用正确的姿势使用 $attrs
 
 不要当 $props 用
+
+<v-click>
+
+对这么用的人建议做 200 个俯卧撑
+
+</v-click>
 
 ---
 
@@ -617,15 +668,21 @@ Vue 提供了非常友好的样式隔离方案，这种特性如何被滥用？
 
 ### `this` 的特性
 
-`this` 是在 Vue 2 中没有任何绕过可能的概念
-
-`this` 具有传染的特性，依赖了实例的其他属性、方法，对逻辑拆分（组合）具有较大的影响
+它具有传染的特性，依赖了实例的其他属性、方法，对逻辑拆分（组合）具有较大的影响
 
 <v-click>
 
 如果真的有逻辑拆分（组合）的需求，在 Vue 2 中只能使用 mixin
 
 `this` 本身不能说是多大的问题，可是在某些场景下它确实会对 UI 代码的编写模式产生不利影响
+
+</v-click>
+
+<v-click>
+
+再贴一遍 Option API 与 Composition API 的对比图：
+
+<img src="/vs.png" style="height: 250px;" />
 
 </v-click>
 
