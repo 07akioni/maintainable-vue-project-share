@@ -60,7 +60,8 @@ lineNumbers: false
 
 <v-click>
 
-> 在提升项目可维护性的过程中，是在 `全局最优` 和 `局部最优` 间平衡的过程
+> 提升项目可维护性：平衡 `全局最优` 和 `局部最优`
+> 最终目的：提升产品的价值
 
 </v-click>
 
@@ -77,8 +78,8 @@ lineNumbers: false
 <v-click>
 
 - 聚焦工程层面
-  - 偏重于执行侧
-  - 非工程层面可维护性的重要性是动态变化的
+  - 偏重执行侧
+  - 非工程层面的重要性动态变化
 
 </v-click>
 
@@ -88,7 +89,7 @@ lineNumbers: false
   - 前端业务逻辑重
     - 状态流转复杂，前后端逻辑边界不明确
   - 生命周期久，资源受限，更容易出现可维护性的问题
-    - 现金流业务有无限堆人的可能
+    - 现金流业务 HC 多，资源多
   - 我没做过 C 端
 
 </v-click>
@@ -114,6 +115,10 @@ lineNumbers: false
 
 ### 困境
 
+<div style="display: flex;">
+
+<div style="overflow: hidden; flex-basis: 0; flex: 1;">
+
 - 每一步走的都很快
 - 但是在泥潭中行走
 - 局部最优的和不是全局最优
@@ -121,6 +126,16 @@ lineNumbers: false
   - 评价标准驱使我们追求局部最优
     - 局部最优可解释
     - 全局最优不易解释
+
+</div>
+
+<div style="overflow: hidden; flex-basis: 0; flex: 1;">
+
+<img src="/tarpit.jpeg" />
+
+</div>
+
+</div>
 
 </v-click>
 
@@ -787,8 +802,8 @@ No Silver Bullet
   - 一个 lock-file 用 X 年
 - 不升级到无法升级
   - case 1
-    - npm7 使用了 lock-file v2，使用后 lock-file 的大量变更让人没有信心升级
-    - 没人知道升级了之后还正不正常，没人背锅
+    - npm7 使用了 lock-file v2，使用后 lock-file 的大量变更，没有信心升级
+    - 谁升级，谁背锅
     - 项目被锁在 node12 + npm6 时代
   - case 2
     - TS 版本被锁死
@@ -796,13 +811,15 @@ No Silver Bullet
 - 理想状态
   - 去掉 lock-file 之后项目可以能正确的跑起来
 
+<img src="/lockdiff.png" style="position: fixed; top: 10vh; height: 400px; right: 100px;"/>
+
 ---
 
 # 鸵鸟策略 · 项目是别人的
 
 - 小明被借调到某项目，实现 feature
-  - feature 很着急
-  - 小明还有别的事，其他排期不会顺延
+  - feature 紧急
+  - 小明的其他排期不会顺延
 - 请问小明是应该
   - 了解项目架构，达成一个 80 分的开发，用 ❤️ 发电
     - 自己会多花点时间
