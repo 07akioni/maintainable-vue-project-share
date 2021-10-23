@@ -341,7 +341,6 @@ defineComponent({
 
 ---
 
-
 # mixin · 滥用 · 实例
 
 ### naive-ui 的 `Select` 组件，Vue 2
@@ -370,7 +369,6 @@ defineComponent({
 </div>
 
 ---
-
 
 # mixin · 治理方式
 
@@ -515,8 +513,6 @@ defineComponent({
 
 <img src="/select-4.png" style="height: 300px; display: inline-block; margin-right: 24px;" />
 <img src="/select-5.png" style="height: 300px; display: inline-block;" />
-
-
 
 ---
 
@@ -689,7 +685,7 @@ export function setSomething(value) {
 
 <v-click>
 
-把 attrs 当成 props 使用
+在数据层把 attrs 当成 props 使用
 
 </v-click>
 
@@ -697,7 +693,7 @@ export function setSomething(value) {
 
 ```js
 const data = {
-  key: store.key || this.$route.query.key || this.$attrs.key,
+  someKey: store.someKey || this.$route.query.someKey || this.$attrs.someKey,
 };
 ```
 
@@ -1050,6 +1046,8 @@ No Silver Bullet
   - 测重要且稳定的功能，不要盲目追求 TDD
   - 如果你不知道为什么要 TDD，不要 TDD
   - 概念最终要解决实际问题
+- 如何收拾烂摊子
+  - 模块替换 > 全量重构
 - 研发效能衡量机制
   - 太难，没有银弹
   - 概念到实践断层
@@ -1076,3 +1074,14 @@ No Silver Bullet
 <br />
 
 <img src="/cd2.jpeg" style="height: 60%;" />
+
+---
+
+# End
+
+- 个人微信
+  <img src="/wechat.jpg" style="height: 120px;" />
+- Naive UI
+  - <img src="/naive.png" style="height: 100px;" />
+    www.naiveui.com
+
